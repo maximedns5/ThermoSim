@@ -1,0 +1,61 @@
+:root {
+  /* ── SURFACES ──────────────────────────────────── */
+  --color-paper:        #F4F2ED;
+  --color-paper-alt:    #EEEBE3;
+  --color-surface:      #FFFFFF;
+
+  /* ── TRAITS & TEXTE ────────────────────────────── */
+  --color-ink:          #0A0A0A;
+  --color-ink-2:        #2B2B2B;
+  --color-ink-3:        #6B6B6B;
+  --color-ink-4:        #A0A0A0;
+  --color-rule:         #C8C5BE;
+  --color-rule-soft:    #E2DFD8;
+
+  /* ── ACCENT UNIQUE ─────────────────────────────── */
+  --color-accent:       #C1440E;
+
+  /* ── TYPOGRAPHIE ───────────────────────────────── */
+  --font-mono:  "IBM Plex Mono", "JetBrains Mono", ui-monospace, monospace;
+  --font-sans:  "IBM Plex Sans", system-ui, sans-serif;
+  --font-serif: "IBM Plex Serif", ui-serif, serif;
+
+  /* ── ESPACEMENTS (grille 4px) ──────────────────── */
+  --space-0: 0;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+
+  /* ── TRAITS (ISO 128) ──────────────────────────── */
+  --stroke-hair:    0.5px;
+  --stroke-thin:    1px;
+  --stroke-medium:  1.5px;
+  --stroke-thick:   2px;
+
+  /* ── RAYONS DE BORDURE ─────────────────────────── */
+  --radius-none:    0;
+  --radius-subtle:  2px;
+  --radius-soft:    4px;
+
+  /* ── DURÉES D'ANIMATION ────────────────────────── */
+  --duration-instant: 80ms;
+  --duration-quick:   150ms;
+  --duration-medium:  250ms;
+  --duration-slow:    400ms;
+  --ease-out:    cubic-bezier(0.215, 0.61, 0.355, 1);
+  --ease-linear: linear;
+
+  /* ── ALIAS COURTS (composants) ─────────────────── */
+  --ink:    var(--color-ink);
+  --paper:  var(--color-paper);
+  --accent: var(--color-accent);
+  --muted:  var(--color-ink-3);
+  --subtle: var(--color-rule-soft);
+  --radius-sm: var(--radius-subtle);
+}
