@@ -36,7 +36,7 @@ export function ConfigPanel() {
   const Section = SECTION_COMPONENTS[activePanel];
 
   return (
-    <aside className="w-72 min-w-72 h-full flex flex-col bg-paper border-r border-rule overflow-hidden">
+    <aside className="w-80 min-w-80 h-full flex flex-col bg-paper border-r border-rule overflow-hidden">
       {/* Onglets horizontaux scrollables */}
       <div className="flex overflow-x-auto border-b border-rule scrollbar-none">
         {PANELS.map((p) => (

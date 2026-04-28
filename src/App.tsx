@@ -29,7 +29,7 @@ function ViewPane() {
         {activeView === '3d' && (
           <Suspense fallback={
             <div className="w-full h-full flex items-center justify-center text-xs font-mono text-ink-4 bg-paper-alt">
-              Chargement moteur 3D…
+              Loading 3D engine…
             </div>
           }>
             <BuildingScene />

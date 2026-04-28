@@ -9,7 +9,7 @@ const VIEWS: Array<{ id: ViewMode; label: string; shortcut: string }> = [
   { id: 'facade',  label: 'FACADE',  shortcut: '2' },
   { id: 'coupe',   label: 'SECTION', shortcut: '3' },
   { id: 'plan',    label: 'PLAN',    shortcut: '4' },
-  { id: 'analyse', label: 'ANALYSE', shortcut: '5' },
+  { id: 'analyse', label: 'ANALYSIS', shortcut: '5' },
 ];
 
 export function Header() {
