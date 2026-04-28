@@ -9,10 +9,10 @@ const INSUL_OPTS = Object.entries(MATERIALS_DB)
   .map(([id, m]) => ({ value: id, label: m.name }));
 
 const ROOF_TYPE_OPTS = [
-  { value: 'flat_concrete', label: 'Terrasse béton' },
-  { value: 'green',         label: 'Toiture végétalisée' },
-  { value: 'inclined_tiles', label: 'Toiture inclinée tuiles' },
-  { value: 'cool_roof',     label: 'Cool roof (réfléchissant)' },
+  { value: 'flat_concrete',   label: 'Concrete flat roof' },
+  { value: 'green',           label: 'Green roof' },
+  { value: 'inclined_tiles',  label: 'Pitched roof (tiles)' },
+  { value: 'cool_roof',       label: 'Cool roof (reflective)' },
 ] as const;
 
 export function RoofSection() {
@@ -29,14 +29,14 @@ export function RoofSection() {
   return (
     <div className="space-y-3">
       <ToggleGroup
-        label="Type de toiture"
+        label="Roof type"
         value={roof.type}
         options={ROOF_TYPE_OPTS as unknown as Array<{ value: string; label: string }>}
         onChange={(v) => updateRoof({ type: v as typeof roof.type })}
       />
 
       <MaterialDropdown
-        label="Isolant toiture"
+        label="Roof insulation"
         value={insulMat}
         options={INSUL_OPTS}
         onChange={(v) => store.setConfig({
@@ -46,7 +46,7 @@ export function RoofSection() {
       />
 
       <TechSlider
-        label="Épaisseur isolant"
+        label="Insulation thickness"
         value={insulThick}
         min={0.04} max={0.40} step={0.01} unit="m" decimals={3}
         onChange={(v) => store.setConfig({
@@ -57,7 +57,7 @@ export function RoofSection() {
       />
 
       <div className="flex justify-between text-xs font-mono mt-1">
-        <span className="text-ink-3">U toiture</span>
+        <span className="text-ink-3">Roof U-value</span>
         <span className={U_roof > 0.5 ? 'text-accent' : 'text-ink'}>
           {U_roof.toFixed(3)} W/(m²·K)
         </span>

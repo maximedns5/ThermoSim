@@ -80,7 +80,7 @@ export function SectionView() {
       </defs>
 
       <text x={MARGIN} y={24} fontSize="11" fontWeight="700" fill="var(--color-ink)" fontFamily="var(--font-sans)">
-        COUPE VERTICALE A-A
+        VERTICAL SECTION A-A
       </text>
       <line x1={MARGIN} y1={28} x2={MARGIN + totalW} y2={28} stroke="var(--color-ink)" strokeWidth="0.8" />
 
@@ -183,19 +183,19 @@ export function SectionView() {
 
       {/* Infos bâtiment */}
       <div className="px-3 pt-3 pb-2 border-b border-rule space-y-1">
-        <p className="text-2xs font-sans font-semibold uppercase tracking-wider text-ink">Géométrie</p>
+        <p className="text-2xs font-sans font-semibold uppercase tracking-wider text-ink">Geometry</p>
         <div className="grid grid-cols-2 gap-x-3 gap-y-0.5 text-xs font-mono">
-          <span className="text-ink-4">Longueur</span>  <span className="text-ink">{geometry.length.toFixed(1)} m</span>
-          <span className="text-ink-4">Largeur</span>   <span className="text-ink">{geometry.width.toFixed(1)} m</span>
-          <span className="text-ink-4">Hauteur tot.</span><span className="text-ink">{height.toFixed(2)} m</span>
-          <span className="text-ink-4">Niveaux</span>   <span className="text-ink">{geometry.nFloors} × {geometry.floorHeight.toFixed(2)} m</span>
-          <span className="text-ink-4">Paroi épaiss.</span><span className="text-ink">{(wallThickness * 100).toFixed(0)} cm</span>
+          <span className="text-ink-4">Length</span>  <span className="text-ink">{geometry.length.toFixed(1)} m</span>
+          <span className="text-ink-4">Width</span>   <span className="text-ink">{geometry.width.toFixed(1)} m</span>
+          <span className="text-ink-4">Total height</span><span className="text-ink">{height.toFixed(2)} m</span>
+          <span className="text-ink-4">Floors</span>   <span className="text-ink">{geometry.nFloors} × {geometry.floorHeight.toFixed(2)} m</span>
+          <span className="text-ink-4">Wall thick.</span><span className="text-ink">{(wallThickness * 100).toFixed(0)} cm</span>
         </div>
       </div>
 
       {/* Composition paroi */}
       <div className="px-3 py-2 border-b border-rule space-y-1">
-        <p className="text-2xs font-sans font-semibold uppercase tracking-wider text-ink">Composition paroi</p>
+        <p className="text-2xs font-sans font-semibold uppercase tracking-wider text-ink">Wall composition</p>
         {wallLayers.map((layer, i) => {
           const mat = MATERIALS_DB[layer.material];
           return (
@@ -218,23 +218,23 @@ export function SectionView() {
 
       {/* Toiture */}
       <div className="px-3 py-2 border-b border-rule space-y-1">
-        <p className="text-2xs font-sans font-semibold uppercase tracking-wider text-ink">Toiture</p>
+        <p className="text-2xs font-sans font-semibold uppercase tracking-wider text-ink">Roof</p>
         <div className="text-xs font-mono text-ink-3">
-          {roof.type === 'flat_concrete' ? 'Toiture terrasse béton' : roof.type}
+          {roof.type === 'flat_concrete' ? 'Concrete flat roof' : roof.type}
         </div>
         {roof.insulation && (
           <div className="text-xs font-mono text-ink-3">
-            Isolant : {MATERIALS_DB[roof.insulation.material]?.name ?? roof.insulation.material} — {(roof.insulation.thickness * 100).toFixed(0)} cm
+            Insulation: {MATERIALS_DB[roof.insulation.material]?.name ?? roof.insulation.material} — {(roof.insulation.thickness * 100).toFixed(0)} cm
           </div>
         )}
       </div>
 
       {/* Cartouche */}
       <div className="px-3 py-2 mt-auto border-t border-rule space-y-0.5">
-        <p className="text-sm font-mono font-bold text-ink leading-tight">ThermoSim — Coupe</p>
-        <p className="text-xs font-mono text-ink-3">{geometry.length.toFixed(0)}×{geometry.width.toFixed(0)} m &bull; {geometry.nFloors} niv.</p>
+        <p className="text-sm font-mono font-bold text-ink leading-tight">ThermoSim — Section</p>
+        <p className="text-xs font-mono text-ink-3">{geometry.length.toFixed(0)}×{geometry.width.toFixed(0)} m &bull; {geometry.nFloors} fl.</p>
         <div className="flex justify-between pt-1 border-t border-rule mt-1">
-          <span className="text-2xs font-mono text-ink-4">Éch. 1:50</span>
+          <span className="text-2xs font-mono text-ink-4">Scale 1:50</span>
           <span className="text-2xs font-mono text-ink-4">{new Date().getFullYear()}</span>
         </div>
       </div>

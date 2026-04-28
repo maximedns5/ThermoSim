@@ -4,7 +4,7 @@ import { TechSlider } from '../controls/TechSlider';
 import { HEATING_SYSTEMS, COOLING_SYSTEMS, ECS_SYSTEMS } from '../../../engine/data/hvac';
 
 const HEAT_OPTS  = Object.values(HEATING_SYSTEMS).map((h) => ({ value: h.id, label: h.name }));
-const COOL_OPTS  = [{ value: '', label: 'Aucune' }, ...Object.values(COOLING_SYSTEMS).filter((c) => c.id !== 'aucune').map((c) => ({ value: c.id, label: c.name }))];
+const COOL_OPTS  = [{ value: '', label: 'None' }, ...Object.values(COOLING_SYSTEMS).filter((c) => c.id !== 'aucune').map((c) => ({ value: c.id, label: c.name }))];
 const ECS_OPTS   = Object.values(ECS_SYSTEMS).map((e) => ({ value: e.id, label: e.name }));
 
 export function HvacSection() {
@@ -17,7 +17,7 @@ export function HvacSection() {
   return (
     <div className="space-y-3">
       <MaterialDropdown
-        label="Système chauffage"
+        label="Heating system"
         value={hvac.heatingId}
         options={HEAT_OPTS}
         onChange={(v) => updateHvac({ heatingId: v })}
@@ -25,7 +25,7 @@ export function HvacSection() {
       />
 
       <MaterialDropdown
-        label="Climatisation"
+        label="Cooling"
         value={hvac.coolingId ?? ''}
         options={COOL_OPTS}
         onChange={(v) => updateHvac({ coolingId: v || null })}
@@ -38,9 +38,9 @@ export function HvacSection() {
         onChange={(v) => updateHvac({ ecsId: v })}
       />
 
-      <TechSlider label="Consigne chauffage" value={hvac.T_set_heat} min={15} max={24} step={0.5} unit="°C" decimals={1}
+      <TechSlider label="Heating setpoint" value={hvac.T_set_heat} min={15} max={24} step={0.5} unit="°C" decimals={1}
         onChange={(v) => updateHvac({ T_set_heat: v })} />
-      <TechSlider label="Consigne clim" value={hvac.T_set_cool ?? 26} min={22} max={30} step={0.5} unit="°C" decimals={1}
+      <TechSlider label="Cooling setpoint" value={hvac.T_set_cool ?? 26} min={22} max={30} step={0.5} unit="°C" decimals={1}
         onChange={(v) => updateHvac({ T_set_cool: v })} />
     </div>
   );

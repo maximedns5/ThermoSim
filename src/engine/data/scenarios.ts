@@ -13,8 +13,8 @@ export interface ScenarioDefinition {
 export const SCENARIOS: Record<string, ScenarioDefinition> = {
   passoire_energetique: {
     id: 'passoire_energetique',
-    name: 'Passoire énergétique',
-    hint: 'Années 60-70, convecteurs',
+    name: 'Energy sieve',
+    hint: '60s-70s, electric heaters',
     config: {
       wallLayers: [
         { material: 'enduit_platre', thickness: 0.015 },
@@ -52,8 +52,8 @@ export const SCENARIOS: Record<string, ScenarioDefinition> = {
 
   renovation_basique: {
     id: 'renovation_basique',
-    name: 'Rénovation basique',
-    hint: 'ITI 80 mm + double vitrage',
+    name: 'Basic renovation',
+    hint: 'ITI 80 mm + double glazing',
     config: {
       wallLayers: [
         { material: 'plaque_platre_ba13',  thickness: 0.013 },
@@ -92,8 +92,8 @@ export const SCENARIOS: Record<string, ScenarioDefinition> = {
 
   renovation_performante: {
     id: 'renovation_performante',
-    name: 'Rénovation performante',
-    hint: 'ITE 160 mm + BE argon + PAC',
+    name: 'High-performance renovation',
+    hint: 'ITE 160 mm + low-e argon + HP',
     config: {
       wallLayers: [
         { material: 'enduit_platre',       thickness: 0.015 },
@@ -132,8 +132,8 @@ export const SCENARIOS: Record<string, ScenarioDefinition> = {
 
   passif: {
     id: 'passif',
-    name: 'Passif',
-    hint: 'ITE 300 mm + triple BE + PAC géo',
+    name: 'Passive house',
+    hint: 'ITE 300 mm + triple low-e + geo HP',
     config: {
       wallLayers: [
         { material: 'plaque_platre_ba13',  thickness: 0.013 },
@@ -172,8 +172,8 @@ export const SCENARIOS: Record<string, ScenarioDefinition> = {
 
   tout_gaz_condensation: {
     id: 'tout_gaz_condensation',
-    name: 'Tout gaz condensation',
-    hint: 'Neuf RT2012 gaz cond.',
+    name: 'All-gas condensation',
+    hint: 'New build RT2012 condensing gas',
     config: {
       wallLayers: [
         { material: 'plaque_platre_ba13',  thickness: 0.013 },

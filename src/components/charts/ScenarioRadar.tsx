@@ -5,7 +5,7 @@ import { solveSteady } from '../../engine/solver/steady';
 import { useBuildingStore } from '../../store/buildingStore';
 import type { BuildingConfig } from '../../engine/types';
 
-const AXES = ['U mur', 'U fenêtre', 'Q design', 'EP/m²', 'CO₂/m²'];
+const AXES = ['U wall', 'U window', 'Q design', 'EP/m²', 'CO₂/m²'];
 const N = AXES.length;
 const CX = 110, CY = 100, R = 75;
 

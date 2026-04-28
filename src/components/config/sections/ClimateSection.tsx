@@ -14,16 +14,16 @@ const CITY_OPTS = [
 ];
 
 const TERRAIN_OPTS = [
-  { value: 'campagne',     label: 'Campagne' },
-  { value: 'suburbain',    label: 'Péri-urbain' },
-  { value: 'urbain',       label: 'Urbain' },
-  { value: 'centre_ville', label: 'Centre-ville' },
+  { value: 'campagne',     label: 'Rural' },
+  { value: 'suburbain',    label: 'Suburban' },
+  { value: 'urbain',       label: 'Urban' },
+  { value: 'centre_ville', label: 'City centre' },
 ] as const;
 
 const USAGE_OPTS = [
-  { value: 'logement', label: 'Logement' },
-  { value: 'bureau',   label: 'Bureau' },
-  { value: 'mixte',    label: 'Mixte' },
+  { value: 'logement', label: 'Residential' },
+  { value: 'bureau',   label: 'Office' },
+  { value: 'mixte',    label: 'Mixed' },
 ] as const;
 
 export function ClimateSection() {
@@ -34,15 +34,15 @@ export function ClimateSection() {
   return (
     <div className="space-y-3">
       <MaterialDropdown
-        label="Ville / Zone climatique"
+        label="City / Climate zone"
         value={terrain.climateCity}
         options={CITY_OPTS}
         onChange={(v) => updateTerrain({ climateCity: v })}
-        hint="Les données TMY sont chargées automatiquement"
+        hint="TMY data is loaded automatically"
       />
 
       <ToggleGroup
-        label="Contexte terrain"
+        label="Site context"
         value={terrain.terrain}
         options={TERRAIN_OPTS as unknown as Array<{ value: string; label: string }>}
         onChange={(v) => updateTerrain({ terrain: v as typeof terrain.terrain })}

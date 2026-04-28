@@ -93,7 +93,7 @@ export function GlaserDiagram() {
         })}
         {/* Axe X */}
         <line x1={PAD.left} y1={PAD.top + IH} x2={PAD.left + IW} y2={PAD.top + IH} stroke="#C8C5BE" />
-        <text x={PAD.left + IW / 2} y={H - 8} textAnchor="middle" fontSize={7} fontFamily="IBM Plex Mono" fill="#6B6B6B" fontStyle="italic">Paroi Ext→Int</text>
+        <text x={PAD.left + IW / 2} y={H - 8} textAnchor="middle" fontSize={7} fontFamily="IBM Plex Mono" fill="#6B6B6B" fontStyle="italic">Wall Ext→Int</text>
         {/* Courbes */}
         <path d={psatPath} fill="none" stroke="#2B2B2B" strokeWidth={1.5} />
         <path d={pvPath} fill="none" stroke="#6B6B6B" strokeWidth={1} strokeDasharray="4 2" />

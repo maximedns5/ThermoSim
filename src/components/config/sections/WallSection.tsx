@@ -39,19 +39,19 @@ export function WallSection() {
   return (
     <div className="space-y-3">
       <ToggleGroup
-        label="Position isolation"
+        label="Insulation position"
         value={insulationPosition}
         options={[
           { value: 'ITI', label: 'ITI' },
           { value: 'ITE', label: 'ITE' },
-          { value: 'AUCUNE', label: 'Aucune' },
+          { value: 'AUCUNE', label: 'None' },
         ]}
         onChange={(v) => store.setConfig({ ...config, insulationPosition: v as 'ITI' | 'ITE' | 'AUCUNE' })}
       />
 
       {structIdx >= 0 && (
         <MaterialDropdown
-          label="Matériau porteur"
+          label="Structural material"
           value={wallLayers[structIdx].material}
           options={STRUCT_OPTIONS}
           onChange={(v) => updateLayer(structIdx, { material: v })}
@@ -61,13 +61,13 @@ export function WallSection() {
       {insulIdx >= 0 && (
         <>
           <MaterialDropdown
-            label="Isolant"
+            label="Insulation material"
             value={wallLayers[insulIdx].material}
             options={INSUL_OPTIONS}
             onChange={(v) => updateLayer(insulIdx, { material: v })}
           />
           <TechSlider
-            label="Épaisseur isolant"
+            label="Insulation thickness"
             value={wallLayers[insulIdx].thickness}
             min={0.02} max={0.40} step={0.005} unit="m" decimals={3}
             onChange={(v) => updateLayer(insulIdx, { thickness: v })}
@@ -78,7 +78,7 @@ export function WallSection() {
       <div className="grid grid-cols-3 gap-2 pt-2 border-t border-rule-soft">
         <MetricSummary label="U" value={U} unit="W/(m²·K)" critical={U > 1.5} />
         <MetricSummary label="R" value={R} unit="m²·K/W" />
-        <MetricSummary label="Ép." value={thick_cm} unit="cm" />
+        <MetricSummary label="Thk." value={thick_cm} unit="cm" />
       </div>
     </div>
   );

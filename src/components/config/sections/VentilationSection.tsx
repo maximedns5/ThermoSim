@@ -20,15 +20,15 @@ export function VentilationSection() {
   return (
     <div className="space-y-3">
       <MaterialDropdown
-        label="Type VMC"
+        label="Ventilation type"
         value={ventilation.vmcId}
         options={VMC_OPTS}
         onChange={(v) => updateVentilation({ vmcId: v })}
-        hint={selectedVmc ? `Récupération ${(selectedVmc.recup * 100).toFixed(0)} %  •  ${selectedVmc.conso_W_m3h} W/(m³/h)` : undefined}
+        hint={selectedVmc ? `Heat recovery ${(selectedVmc.recup * 100).toFixed(0)} %  •  ${selectedVmc.conso_W_m3h} W/(m³/h)` : undefined}
       />
 
       <MaterialDropdown
-        label="Étanchéité à l'air"
+        label="Airtightness"
         value={selectedAirtight?.id ?? 'standard'}
         options={AIR_OPTS}
         onChange={(v) => {
@@ -38,7 +38,7 @@ export function VentilationSection() {
       />
 
       <TechSlider
-        label="n50 (mesure blower-door)"
+        label="n50 (blower-door test)"
         value={ventilation.n50}
         min={0.3} max={20} step={0.1} unit="vol/h" decimals={1}
         onChange={(v) => updateVentilation({ n50: v })}
@@ -46,7 +46,7 @@ export function VentilationSection() {
       />
 
       <TechSlider
-        label="Débit hygiénique"
+        label="Hygienic airflow"
         value={ventilation.q_v_hygienique}
         min={0} max={1000} step={10} unit="m³/h" decimals={0}
         onChange={(v) => updateVentilation({ q_v_hygienique: v })}
@@ -54,7 +54,7 @@ export function VentilationSection() {
 
       <div className="grid grid-cols-2 gap-2 pt-2 border-t border-rule-soft">
         <MetricSummary label="n50" value={ventilation.n50} unit="vol/h" critical={ventilation.n50 > 7} />
-        <MetricSummary label="Débit" value={ventilation.q_v_hygienique} unit="m³/h" />
+        <MetricSummary label="Flow" value={ventilation.q_v_hygienique} unit="m³/h" />
       </div>
     </div>
   );

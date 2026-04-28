@@ -6,8 +6,8 @@ import type { ViewMode } from '../../store/uiStore';
 
 const VIEWS: Array<{ id: ViewMode; label: string; shortcut: string }> = [
   { id: '3d',      label: '3D',      shortcut: '1' },
-  { id: 'facade',  label: 'FAÇADE',  shortcut: '2' },
-  { id: 'coupe',   label: 'COUPE',   shortcut: '3' },
+  { id: 'facade',  label: 'FACADE',  shortcut: '2' },
+  { id: 'coupe',   label: 'SECTION', shortcut: '3' },
   { id: 'plan',    label: 'PLAN',    shortcut: '4' },
   { id: 'analyse', label: 'ANALYSE', shortcut: '5' },
 ];
@@ -39,7 +39,7 @@ export function Header() {
                 : 'text-ink-3 hover:text-ink hover:bg-paper-alt'
               }
               border-r border-rule`}
-            title={`Vue ${v.label} (${v.shortcut})`}
+            title={`View ${v.label} (${v.shortcut})`}
           >
             {v.label}
             {activeView === v.id && (
@@ -66,7 +66,7 @@ export function Header() {
           disabled={isSimRunning}
           className="flex items-center gap-2 px-3 py-1.5 border border-ink text-xs font-mono
             hover:bg-ink hover:text-paper transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
-          title="Lancer simulation dynamique 8760h (⌘↵)"
+          title="Run dynamic simulation 8760h (⌘↵)"
         >
           <span className="text-sm leading-none">▷</span>
           SIM 8760h

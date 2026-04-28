@@ -8,25 +8,25 @@ export function SankeyEnergy() {
   const { steadyResult } = useSimulationStore();
 
   if (!steadyResult) {
-    return <div className="text-xs font-mono text-ink-4 h-20 flex items-center">Simulation requise</div>;
+    return <div className="text-xs font-mono text-ink-4 h-20 flex items-center">Simulation required</div>;
   }
 
   const { Q_walls_W, Q_windows_W, Q_roof_W, Q_floor_W, Q_ventilation_W } = steadyResult;
   const total = Q_walls_W + Q_windows_W + Q_roof_W + Q_floor_W + Q_ventilation_W;
 
   const flows = [
-    { label: 'Parois',     value: Q_walls_W,       x: 200 },
-    { label: 'Fenêtres',   value: Q_windows_W,     x: 200 },
-    { label: 'Toiture',    value: Q_roof_W,         x: 200 },
-    { label: 'Plancher',   value: Q_floor_W,        x: 200 },
-    { label: 'Ventilation',value: Q_ventilation_W,  x: 200 },
+    { label: 'Walls',       value: Q_walls_W,       x: 200 },
+    { label: 'Windows',     value: Q_windows_W,     x: 200 },
+    { label: 'Roof',        value: Q_roof_W,         x: 200 },
+    { label: 'Floor',       value: Q_floor_W,        x: 200 },
+    { label: 'Ventilation', value: Q_ventilation_W,  x: 200 },
   ];
 
   let yOffset = 20;
 
   return (
     <div className="space-y-1">
-      <p className="text-xs font-sans text-ink-3 uppercase tracking-wider">Flux de pertes — régime permanent</p>
+      <p className="text-xs font-sans text-ink-3 uppercase tracking-wider">Heat loss flow — steady state</p>
       <svg viewBox={`0 0 ${W} ${H}`} className="w-full border border-rule bg-paper" role="img">
         {/* Nœud source */}
         <rect x={50} y={H / 2 - 20} width={40} height={40} fill="#E2DFD8" stroke="#C8C5BE" />

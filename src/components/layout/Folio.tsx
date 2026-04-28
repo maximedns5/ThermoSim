@@ -4,7 +4,7 @@ import { useBuildingStore } from '../../store/buildingStore';
 export function Folio() {
   const config = useBuildingStore((s) => s.config);
   const now = new Date();
-  const dateStr = now.toLocaleDateString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric' });
+  const dateStr = now.toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' });
   const version = import.meta.env.VITE_APP_VERSION ?? '2.0.0';
 
   return (
@@ -13,7 +13,7 @@ export function Folio() {
         THERMOSIM WEB  ·  {version}  ·  RE2020
       </span>
       <span className="text-2xs font-mono text-ink-4 tracking-wider">
-        {'Projet sans titre'}  ·  {dateStr}
+        {'Untitled project'}  ·  {dateStr}
       </span>
       <span className="text-2xs font-mono text-ink-4 tracking-wider">
         Folio 1/1

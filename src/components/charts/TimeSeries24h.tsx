@@ -62,7 +62,7 @@ export function TimeSeries24h() {
   }, [annualResult]);
 
   if (!annualResult) {
-    return <div className="text-xs font-mono text-ink-4 h-20 flex items-center">Simulation requise</div>;
+    return <div className="text-xs font-mono text-ink-4 h-20 flex items-center">Simulation required</div>;
   }
 
   const { tMin: axisTmin, tMax: axisTmax } = axisData;
@@ -70,7 +70,7 @@ export function TimeSeries24h() {
 
   return (
     <div className="space-y-1">
-      <p className="text-xs font-sans text-ink-3 uppercase tracking-wider">Profil moyen 24h — T zone &amp; PMV</p>
+      <p className="text-xs font-sans text-ink-3 uppercase tracking-wider">Average 24h profile — T zone &amp; PMV</p>
       <svg viewBox={`0 0 ${W} ${H}`} className="w-full border border-rule bg-paper" role="img" aria-label="Profil 24h">
         {/* Axe Y */}
         <line x1={PAD.left} y1={PAD.top} x2={PAD.left} y2={PAD.top + IH} stroke="#C8C5BE" strokeWidth={1} />

@@ -21,20 +21,20 @@ export function WindowSection() {
 
   return (
     <div className="space-y-3">
-      <MaterialDropdown label="Vitrage" value={windows.glazingId} options={GLAZING_OPTS}
+      <MaterialDropdown label="Glazing" value={windows.glazingId} options={GLAZING_OPTS}
         onChange={(v) => updateWindows({ glazingId: v })} />
-      <MaterialDropdown label="Cadre" value={windows.frameId} options={FRAME_OPTS}
+      <MaterialDropdown label="Frame" value={windows.frameId} options={FRAME_OPTS}
         onChange={(v) => updateWindows({ frameId: v })} />
-      <MaterialDropdown label="Protection solaire" value={windows.shadingId} options={SHADING_OPTS}
+      <MaterialDropdown label="Solar shading" value={windows.shadingId} options={SHADING_OPTS}
         onChange={(v) => updateWindows({ shadingId: v })} />
 
       <div className="section-rule" />
-      <p className="text-xs font-sans text-ink-3 uppercase tracking-wide">Ratio surfaces vitrées</p>
+      <p className="text-xs font-sans text-ink-3 uppercase tracking-wide">Glazed surface ratio</p>
       {(['North', 'South', 'East', 'West'] as const).map((dir) => {
         const key = `ratio${dir}` as keyof typeof windows;
         return (
           <TechSlider key={dir}
-            label={`Façade ${dir === 'North' ? 'Nord' : dir === 'South' ? 'Sud' : dir === 'East' ? 'Est' : 'Ouest'}`}
+            label={`Facade ${dir}`}
             value={windows[key] as number}
             min={0.05} max={0.80} step={0.01} unit="m/m" decimals={2}
             onChange={(v) => updateWindows({ [key]: v })}
@@ -43,8 +43,8 @@ export function WindowSection() {
       })}
 
       <div className="grid grid-cols-2 gap-2 pt-2 border-t border-rule-soft">
-        <MetricSummary label="Uw eff." value={Uw} unit="W/(m²·K)" critical={Uw > 2.5} />
-        <MetricSummary label="g vitrage" value={g} unit="" />
+        <MetricSummary label="Eff. Uw" value={Uw} unit="W/(m²·K)" critical={Uw > 2.5} />
+        <MetricSummary label="g glazing" value={g} unit="" />
       </div>
     </div>
   );

@@ -57,51 +57,51 @@ export function AnalyseView() {
   const costPerApt = nAptTotal > 0 ? m.cost_eur / nAptTotal : 0;
   const costPerM2Apt = aptSizeM2 > 0 ? costPerApt / aptSizeM2 : 0;
 
-  // Input local pour l'éditeur apt size
+  // Local input for apt size editor
   const [aptInput, setAptInput] = useState(String(aptSizeM2));
 
   return (
     <div className="h-full overflow-y-auto bg-paper">
       <div className="max-w-5xl mx-auto px-6 py-6 space-y-8">
 
-        {/* ── En-tête ── */}
+        {/* ── Header ── */}
         <div className="border-b border-rule pb-4">
           <h1 className="text-base font-mono font-bold text-ink uppercase tracking-widest">
-            Analyse thermique du bâtiment
+            Building thermal analysis
           </h1>
           <p className="mt-1 text-xs font-sans text-ink-3">
-            Résultats de la simulation régime permanent + dynamique 8760h.
-            Lancez « SIM 8760h » pour activer les graphiques dynamiques.
+            Steady-state + dynamic 8760h simulation results.
+            Click "SIM 8760h" to enable dynamic charts.
           </p>
         </div>
 
-        {/* ── KPIs synthèse ── */}
+        {/* ── KPIs summary ── */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-          <Kpi label="U paroi" value={m.U_wall.toFixed(3)} unit="W/(m²·K)"
+          <Kpi label="Wall U" value={m.U_wall.toFixed(3)} unit="W/(m²·K)"
             sub={`R = ${m.R_wall.toFixed(2)} m²·K/W`} />
-          <Kpi label="Q design" value={(m.Q_design_W / 1000).toFixed(1)} unit="kW"
-            sub="puiss. max hiver" />
-          <Kpi label="Ep primaire" value={m.EP_m2.toFixed(0)} unit="kWhEP/(m²·an)"
-            sub={`DPE : ${m.dpe}`} />
-          <Kpi label="CO₂" value={m.CO2_m2.toFixed(1)} unit="kgCO₂/(m²·an)" />
-          <Kpi label="Coût total/an" value={m.cost_eur.toFixed(0)} unit="€/an"
+          <Kpi label="Design Q" value={(m.Q_design_W / 1000).toFixed(1)} unit="kW"
+            sub="peak winter load" />
+          <Kpi label="Primary EP" value={m.EP_m2.toFixed(0)} unit="kWhEP/(m²·yr)"
+            sub={`EPC: ${m.dpe}`} />
+          <Kpi label="CO₂" value={m.CO2_m2.toFixed(1)} unit="kgCO₂/(m²·yr)" />
+          <Kpi label="Total cost/yr" value={m.cost_eur.toFixed(0)} unit="€/yr"
             sub={`${heatingSys?.name ?? '—'}`} />
-          <Kpi label="Surface totale" value={A_total.toFixed(0)} unit="m²"
-            sub={`${config.geometry.nFloors} étage(s)`} />
+          <Kpi label="Total area" value={A_total.toFixed(0)} unit="m²"
+            sub={`${config.geometry.nFloors} floor(s)`} />
         </div>
 
-        {/* ── Calculateur coût par appartement ── */}
+        {/* ── Cost per apartment calculator ── */}
         <div className="border border-rule bg-paper rounded-sm overflow-hidden">
           <div className="px-4 pt-3 pb-2 border-b border-rule bg-paper-alt">
-            <p className="text-xs font-sans font-semibold uppercase tracking-widest text-ink">Coût par appartement</p>
+            <p className="text-xs font-sans font-semibold uppercase tracking-widest text-ink">Cost per apartment</p>
             <p className="mt-1 text-xs font-sans text-ink-3 leading-relaxed">
-              Renseignez la surface type d'un appartement pour estimer le coût annuel chauffage + ECS par logement.
+              Enter a typical apartment area to estimate the annual heating + DHW cost per unit.
             </p>
           </div>
           <div className="p-4 space-y-4">
-            {/* Saisie taille apt */}
+            {/* Apt size input */}
             <div className="flex items-center gap-3">
-              <label className="text-xs font-mono text-ink-3 shrink-0">Surface appartement</label>
+              <label className="text-xs font-mono text-ink-3 shrink-0">Apartment area</label>
               <input
                 type="number"
                 min={10}
@@ -119,61 +119,61 @@ export function AnalyseView() {
               <span className="text-xs font-mono text-ink-4">m²</span>
             </div>
 
-            {/* Résultats */}
+            {/* Results */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-              <Kpi label="Apts / étage" value={String(nAptPerFloor)} unit=""
+              <Kpi label="Apts / floor" value={String(nAptPerFloor)} unit=""
                 sub={`${A_floor.toFixed(0)} m² ÷ ${aptSizeM2} m²`} />
-              <Kpi label="Apts total" value={String(nAptTotal)} unit=""
-                sub={`${config.geometry.nFloors} niv.`} />
-              <Kpi label="Coût / apt / an" value={costPerApt.toFixed(0)} unit="€/an"
+              <Kpi label="Total apts" value={String(nAptTotal)} unit=""
+                sub={`${config.geometry.nFloors} fl.`} />
+              <Kpi label="Cost / apt / yr" value={costPerApt.toFixed(0)} unit="€/yr"
                 sub={`${heatingSys?.name ?? '—'}`} />
-              <Kpi label="Coût / m² apt" value={costPerM2Apt.toFixed(1)} unit="€/(m²·an)"
-                sub="chauffage + ECS" />
+              <Kpi label="Cost / m² apt" value={costPerM2Apt.toFixed(1)} unit="€/(m²·yr)"
+                sub="heating + DHW" />
             </div>
 
             <p className="text-xs font-sans text-ink-4 leading-relaxed">
-              <strong>Méthode :</strong> le nombre d'appartements par étage est calculé par
-              {' '}<em>floor(S_plancher ÷ S_apt)</em> — sans déduire les circulations.
-              Le coût total annuel est divisé équitablement entre tous les appartements.
-              Ce coût couvre uniquement le chauffage et l'eau chaude sanitaire.
+              <strong>Method:</strong> apartments per floor are calculated as
+              {' '}<em>floor(S_floor ÷ S_apt)</em> — circulation areas not deducted.
+              The total annual cost is split equally across all apartments.
+              This cost covers heating and domestic hot water only.
             </p>
           </div>
         </div>
 
-        {/* ── Explications coût ── */}
+        {/* ── Annual cost explanation ── */}
         <div className="p-4 bg-paper-alt border border-rule text-xs font-sans text-ink-3 leading-relaxed space-y-1">
-          <p className="font-semibold text-ink">Comment est calculé le coût annuel ?</p>
+          <p className="font-semibold text-ink">How is the annual cost calculated?</p>
           <p>
-            1. On calcule les <strong>besoins de chauffage</strong> (kWh/an) via les degrés-jours unifiés (DJU 2500 par défaut)
-            depuis la puissance de déperditions Q_design et l'enveloppe du bâtiment.
+            1. <strong>Heating demand</strong> (kWh/yr) is computed via unified degree-days (HDD 2500 by default)
+            from the design heat loss Q_design and the building envelope.
           </p>
           <p>
-            2. On divise par le <strong>rendement</strong> du système de chauffage choisi (COP PAC, η chaudière…)
-            pour obtenir l'énergie finale consommée (kWh EF).
+            2. Divided by the <strong>efficiency</strong> of the chosen heating system (heat pump COP, boiler η…)
+            to obtain final energy consumed (kWh FE).
           </p>
           <p>
-            3. On ajoute une estimation de l'<strong>ECS</strong> (eau chaude sanitaire, EN 15316 : ≈ 35 kWh/m²/an
-            divisé par le rendement ECS).
+            3. A <strong>DHW</strong> estimate is added (domestic hot water, EN 15316: ≈ 35 kWh/m²/yr
+            divided by DHW system efficiency).
           </p>
           <p>
-            4. L'énergie finale est multipliée par le <strong>prix unitaire</strong> du vecteur énergétique
-            (ex. électricité ≈ 0,228 €/kWh, gaz ≈ 0,119 €/kWh).
-            <em> Ce coût couvre uniquement le chauffage + ECS, pas les autres usages électriques.</em>
+            4. Final energy is multiplied by the <strong>unit price</strong> of the energy carrier
+            (e.g. electricity ≈ 0.228 €/kWh, gas ≈ 0.119 €/kWh).
+            <em> This cost covers heating + DHW only, not other electrical uses.</em>
           </p>
         </div>
 
-        {/* ── Flux de pertes ── */}
+        {/* ── Heat loss flow ── */}
         <Section
-          title="Flux de pertes thermiques — régime permanent"
+          title="Thermal heat loss flow — steady state"
           explain={
             <>
-              Ce diagramme montre comment les <strong>déperditions totales</strong> du bâtiment (en W, pour le jour
-              de pointe hivernal) se répartissent entre les cinq postes : parois, fenêtres, toiture, plancher bas
-              et ventilation. La largeur de chaque bande est proportionnelle à la part du poste.
+              This diagram shows how the building's <strong>total heat losses</strong> (in W, for the winter
+              design day) are distributed across five components: walls, windows, roof, ground floor
+              and ventilation. Each band width is proportional to its share of losses.
               <br />
-              <strong>Comment le lire :</strong> le nœud de gauche (carré) représente la puissance totale à fournir
-              par le système de chauffage. Les bandes qui partent vers la droite représentent les chemins de fuite
-              de la chaleur. Plus une bande est large, plus ce poste contribue aux pertes.
+              <strong>How to read it:</strong> the left node (square) represents the total power the heating
+              system must supply. Bands branching to the right represent heat escape paths.
+              The wider a band, the more that component contributes to heat loss.
             </>
           }
         >
@@ -182,125 +182,122 @@ export function AnalyseView() {
 
         {/* ── Heatmap ── */}
         <Section
-          title="Heatmap besoins de chauffage — 8760h"
+          title="Heating demand heatmap — 8760h"
           explain={
             <>
-              Chaque pixel représente <strong>1 heure</strong> de l'année.
-              <strong> Axe horizontal</strong> = 365 jours (janvier à gauche, décembre à droite).
-              <strong> Axe vertical</strong> = 24 heures de la journée (0h en haut, 23h en bas).
-              <strong> Couleur</strong> = puissance de chauffe nécessaire : blanc ≈ 0 W (pas de chauffage),
-              bleu foncé = forte demande.
+              Each pixel represents <strong>1 hour</strong> of the year.
+              <strong> Horizontal axis</strong> = 365 days (January on left, December on right).
+              <strong> Vertical axis</strong> = 24 hours of the day (0h top, 23h bottom).
+              <strong> Color</strong> = required heating power: white ≈ 0 W (no heating needed),
+              dark blue = high demand.
               <br />
-              Les zones blanches en été montrent l'absence de besoin de chauffe. Les bandes sombres
-              en janvier/février correspondent aux nuits froides. Si vous voyez des colonnes sombres isolées,
-              ce sont des vagues de froid passagères.
+              White areas in summer indicate no heating demand. Dark bands in January/February correspond
+              to cold nights. Isolated dark columns indicate cold snaps.
             </>
           }
         >
           <HeatLossHeatmap />
         </Section>
 
-        {/* ── Profil 24h + PMV ── */}
+        {/* ── 24h profile + PMV ── */}
         <Section
-          title="Profil moyen journalier — température & confort"
+          title="Average daily profile — temperature & comfort"
           explain={
             <>
-              Moyenne horaire sur l'année entière. La <strong>courbe pleine</strong> est la température intérieure
-              T_zone (°C) — elle montre si le système de chauffage maintient bien la consigne.
-              La <strong>courbe pointillée</strong> est le PMV (Predicted Mean Vote, ISO 7730) :
-              0 = confort neutre, −3 = froid, +3 = chaud. Visez −0,5 à +0,5 pour un bâtiment confortable.
+              Hourly average over the full year. The <strong>solid line</strong> is the indoor temperature
+              T_zone (°C) — it shows whether the heating system maintains the setpoint.
+              The <strong>dashed line</strong> is the PMV (Predicted Mean Vote, ISO 7730):
+              0 = neutral comfort, −3 = cold, +3 = hot. Target −0.5 to +0.5 for a comfortable building.
             </>
           }
         >
           <div className="max-w-lg"><TimeSeries24h /></div>
         </Section>
 
-        {/* ── Série annuelle ── */}
+        {/* ── Annual series ── */}
         <Section
-          title="Évolution annuelle — température & chauffe"
+          title="Annual evolution — temperature & heating"
           explain={
             <>
-              Série temporelle 8760h. La <strong>courbe pleine (°C)</strong> est la température intérieure T_zone
-              au fil de l'année. La <strong>courbe pointillée (kW)</strong> est la puissance de chauffage Q_heat :
-              elle monte en hiver et tombe à zéro en été. Les pics correspondent aux nuits les plus froides.
-              Cette vue permet de vérifier que le bâtiment ne surchauffe pas en été (T_zone ne doit pas dépasser
-              26–28 °C prolongés).
+              8760h time series. The <strong>solid line (°C)</strong> is the indoor temperature T_zone
+              throughout the year. The <strong>dashed line (kW)</strong> is the heating power Q_heat:
+              it rises in winter and drops to zero in summer. Peaks correspond to the coldest nights.
+              This view helps verify the building does not overheat in summer (T_zone should not exceed
+              26–28 °C for extended periods).
             </>
           }
         >
           <div className="max-w-lg"><TimeSeriesAnnual /></div>
         </Section>
 
-        {/* ── Diagramme de Glaser ── */}
+        {/* ── Glaser diagram ── */}
         <Section
-          title="Diagramme de Glaser — risque de condensation"
+          title="Glaser diagram — condensation risk"
           explain={
             <>
-              Ce diagramme analyse le risque de <strong>condensation dans la paroi</strong> en régime permanent
-              hivernal (hypothèse : T_ext = −5 °C, HR_ext = 80 %, T_int = 20 °C, HR_int = 50 %).
+              This diagram analyses the risk of <strong>condensation within the wall</strong> under steady-state
+              winter conditions (assumptions: T_ext = −5 °C, RH_ext = 80 %, T_int = 20 °C, RH_int = 50 %).
               <br />
-              <strong>Axe X</strong> : épaisseur de la paroi de l'extérieur (EXT) vers l'intérieur (INT).
+              <strong>X axis</strong>: wall thickness from exterior (EXT) to interior (INT).
               <br />
-              <strong>Courbe p_sat (trait plein)</strong> : pression de vapeur saturante — elle suit le profil
-              de température dans la paroi. Si la température baisse en allant vers l'extérieur, p_sat baisse aussi.
+              <strong>p_sat curve (solid)</strong>: saturation vapour pressure — follows the temperature profile
+              in the wall. As temperature drops toward the exterior, p_sat also drops.
               <br />
-              <strong>Courbe p_v (tirets)</strong> : pression de vapeur réelle calculée par la méthode de Glaser.
+              <strong>p_v curve (dashed)</strong>: actual vapour pressure calculated by the Glaser method.
               <br />
-              <strong>Risque</strong> : si p_v &gt; p_sat en un point, la vapeur se condense dans la paroi
-              → risque de moisissures et dégradation de l'isolant. Assurez-vous que p_v reste toujours en dessous
-              de p_sat.
+              <strong>Risk</strong>: if p_v &gt; p_sat at any point, vapour condenses in the wall
+              → risk of mould and insulation degradation. Ensure p_v stays below p_sat throughout.
             </>
           }
         >
           <div className="max-w-sm"><GlaserDiagram /></div>
         </Section>
 
-        {/* ── COP PAC ── */}
+        {/* ── Heat pump COP ── */}
         <Section
-          title="Performance PAC — COP selon T source"
+          title="Heat pump performance — COP vs. source temperature"
           explain={
             <>
-              Courbe de COP (Coefficient de Performance) de la pompe à chaleur en fonction de la
-              <strong> température de la source froide</strong> (T_ext pour une PAC air/air ou air/eau).
-              Un COP de 3 signifie que la PAC fournit 3 kWh de chaleur pour 1 kWh d'électricité consommé.
+              COP (Coefficient of Performance) curve of the heat pump as a function of the
+              <strong> cold source temperature</strong> (T_ext for an air-to-air or air-to-water HP).
+              A COP of 3 means the HP delivers 3 kWh of heat per 1 kWh of electricity consumed.
               <br />
-              Plus il fait froid dehors, plus le COP chute — c'est pourquoi les PAC fonctionnent moins bien
-              par grand froid. La zone grisée indique la plage de températures habituellement rencontrée sur le
-              site climatique choisi.
+              The colder the outdoor temperature, the lower the COP — which is why heat pumps perform
+              less efficiently in very cold weather. The shaded area indicates the typical temperature range
+              for the selected climate site.
             </>
           }
         >
           <div className="max-w-sm"><HvacPerformance /></div>
         </Section>
 
-        {/* ── Radar scénarios ── */}
+        {/* ── Multi-criteria radar ── */}
         <Section
-          title="Radar multi-critères"
+          title="Multi-criteria radar"
           explain={
             <>
-              Vue synthétique en étoile sur 6 critères normalisés (0 = mauvais, 1 = excellent) :
-              isolation thermique, performance des vitrages, efficacité du système HVAC, étanchéité à l'air,
-              inertie thermique et DPE. Permet de comparer rapidement les forces et faiblesses du bâtiment
-              et d'identifier les postes prioritaires à améliorer.
+              Star chart across 6 normalised criteria (0 = poor, 1 = excellent):
+              thermal insulation, glazing performance, HVAC system efficiency, airtightness,
+              thermal mass and EPC rating. Quickly compare the building's strengths and weaknesses
+              and identify the highest-priority areas for improvement.
             </>
           }
         >
           <div className="max-w-xs"><ScenarioRadar /></div>
         </Section>
 
-        {/* ── Explication Coupe & Plan ── */}
+        {/* ── Section & Plan explanation ── */}
         <div className="p-4 bg-paper-alt border border-rule text-xs font-sans text-ink-3 leading-relaxed space-y-3">
-          <p className="font-semibold text-ink text-sm">À quoi servent les onglets Coupe et Plan ?</p>
+          <p className="font-semibold text-ink text-sm">What are the Section and Plan tabs for?</p>
           <p>
-            <strong>COUPE</strong> — Vue en coupe verticale du bâtiment. Elle montre, du sol jusqu'au toit,
-            l'empilement des couches de la paroi extérieure (béton, isolant, enduit…) avec leurs épaisseurs et
-            conductivités thermiques (λ). Elle permet de vérifier visuellement la cohérence de la composition
-            de paroi et d'estimer l'épaisseur totale.
+            <strong>SECTION</strong> — Vertical cross-section of the building. Shows, from floor to roof,
+            the stacking of external wall layers (concrete, insulation, render…) with their thicknesses and
+            thermal conductivities (λ). Useful for visually verifying wall composition and estimating total thickness.
           </p>
           <p>
-            <strong>PLAN</strong> — Vue en plan horizontal (comme si on coupait le bâtiment à mi-hauteur et qu'on
-            regardait de dessus). Elle montre la géométrie du bâtiment, l'orientation, et la composition de la
-            paroi nord couche par couche. Utile pour vérifier le ratio de surface vitrée et l'orientation solaire.
+            <strong>PLAN</strong> — Horizontal floor plan (as if cutting the building at mid-height and looking down).
+            Shows the building geometry, orientation, and north wall layer composition. Useful for checking
+            glazing area ratios and solar orientation.
           </p>
         </div>
 

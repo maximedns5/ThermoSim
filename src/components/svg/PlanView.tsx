@@ -146,31 +146,31 @@ export function PlanView() {
 
       {/* Infos surface */}
       <div className="px-3 pt-3 pb-2 border-b border-rule space-y-1">
-        <p className="text-2xs font-sans font-semibold uppercase tracking-wider text-ink">Surfaces</p>
+        <p className="text-2xs font-sans font-semibold uppercase tracking-wider text-ink">Areas</p>
         <div className="grid grid-cols-2 gap-x-3 gap-y-0.5 text-xs font-mono">
-          <span className="text-ink-4">Longueur</span>   <span className="text-ink">{geometry.length.toFixed(1)} m</span>
-          <span className="text-ink-4">Profondeur</span> <span className="text-ink">{geometry.width.toFixed(1)} m</span>
-          <span className="text-ink-4">Niveaux</span>    <span className="text-ink">{geometry.nFloors}</span>
-          <span className="text-ink-4">S plancher / niv.</span><span className="text-ink">{(geometry.length * geometry.width).toFixed(1)} m²</span>
-          <span className="text-ink-4">S totale</span>   <span className="text-ink font-bold">{(geometry.length * geometry.width * geometry.nFloors).toFixed(1)} m²</span>
+          <span className="text-ink-4">Length</span>    <span className="text-ink">{geometry.length.toFixed(1)} m</span>
+          <span className="text-ink-4">Depth</span>  <span className="text-ink">{geometry.width.toFixed(1)} m</span>
+          <span className="text-ink-4">Floors</span>     <span className="text-ink">{geometry.nFloors}</span>
+          <span className="text-ink-4">Floor area / fl.</span><span className="text-ink">{(geometry.length * geometry.width).toFixed(1)} m²</span>
+          <span className="text-ink-4">Total area</span>   <span className="text-ink font-bold">{(geometry.length * geometry.width * geometry.nFloors).toFixed(1)} m²</span>
           <span className="text-ink-4">Orientation</span><span className="text-ink">{geometry.orientation}°</span>
         </div>
       </div>
 
       {/* Vitrages */}
       <div className="px-3 py-2 border-b border-rule space-y-0.5">
-        <p className="text-2xs font-sans font-semibold uppercase tracking-wider text-ink">Ratio vitrages</p>
+        <p className="text-2xs font-sans font-semibold uppercase tracking-wider text-ink">Glazing ratio</p>
         <div className="grid grid-cols-2 gap-x-3 gap-y-0.5 text-xs font-mono">
-          <span className="text-ink-4">Sud</span>  <span className="text-ink">{Math.round(config.windows.ratioSouth * 100)} %</span>
-          <span className="text-ink-4">Nord</span> <span className="text-ink">{Math.round(config.windows.ratioNorth * 100)} %</span>
-          <span className="text-ink-4">Est</span>  <span className="text-ink">{Math.round(config.windows.ratioEast * 100)} %</span>
-          <span className="text-ink-4">Ouest</span><span className="text-ink">{Math.round(config.windows.ratioWest * 100)} %</span>
+          <span className="text-ink-4">South</span> <span className="text-ink">{Math.round(config.windows.ratioSouth * 100)} %</span>
+          <span className="text-ink-4">North</span> <span className="text-ink">{Math.round(config.windows.ratioNorth * 100)} %</span>
+          <span className="text-ink-4">East</span>  <span className="text-ink">{Math.round(config.windows.ratioEast * 100)} %</span>
+          <span className="text-ink-4">West</span>  <span className="text-ink">{Math.round(config.windows.ratioWest * 100)} %</span>
         </div>
       </div>
 
       {/* Composition paroi */}
       <div className="px-3 py-2 border-b border-rule space-y-1">
-        <p className="text-2xs font-sans font-semibold uppercase tracking-wider text-ink">Composition paroi</p>
+        <p className="text-2xs font-sans font-semibold uppercase tracking-wider text-ink">Wall composition</p>
         {wallLayers.map((layer, i) => {
           const mat = MATERIALS_DB[layer.material];
           return (
@@ -186,9 +186,9 @@ export function PlanView() {
       {/* Cartouche */}
       <div className="px-3 py-2 mt-auto border-t border-rule space-y-0.5">
         <p className="text-sm font-mono font-bold text-ink leading-tight">ThermoSim — Plan</p>
-        <p className="text-xs font-mono text-ink-3">{geometry.length.toFixed(0)}×{geometry.width.toFixed(0)} m &bull; {geometry.nFloors} niv.</p>
+        <p className="text-xs font-mono text-ink-3">{geometry.length.toFixed(0)}×{geometry.width.toFixed(0)} m &bull; {geometry.nFloors} fl.</p>
         <div className="flex justify-between pt-1 border-t border-rule mt-1">
-          <span className="text-2xs font-mono text-ink-4">Éch. 1:50</span>
+          <span className="text-2xs font-mono text-ink-4">Scale 1:50</span>
           <span className="text-2xs font-mono text-ink-4">{new Date().getFullYear()}</span>
         </div>
       </div>

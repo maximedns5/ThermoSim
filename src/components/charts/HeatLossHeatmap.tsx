@@ -38,22 +38,22 @@ export function HeatLossHeatmap() {
   if (!data) {
     return (
       <div className="flex items-center justify-center h-32 text-xs font-mono text-ink-4">
-        Lancer la simulation 8760h pour afficher la heatmap
+        Run the 8760h simulation to display the heatmap
       </div>
     );
   }
 
   return (
     <div className="space-y-1">
-      <p className="text-xs font-sans text-ink-3 uppercase tracking-wider">Pertes thermiques horaires — 8760h</p>
+      <p className="text-xs font-sans text-ink-3 uppercase tracking-wider">Hourly heat losses — 8760h</p>
       <canvas
         ref={canvasRef}
         className="w-full border border-rule"
         style={{ imageRendering: 'pixelated', height: 80 }}
-        aria-label="Heatmap des pertes thermiques horaires"
+        aria-label="Hourly heat loss heatmap"
       />
       <div className="flex justify-between text-xs font-mono text-ink-4">
-        <span>Janv.</span><span>Avr.</span><span>Juil.</span><span>Oct.</span><span>Déc.</span>
+        <span>Jan.</span><span>Apr.</span><span>Jul.</span><span>Oct.</span><span>Dec.</span>
       </div>
     </div>
   );

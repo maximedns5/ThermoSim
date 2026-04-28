@@ -41,22 +41,22 @@ export function ComfortMap() {
   }, [annualResult?.pmv]);
 
   if (!annualResult) {
-    return <div className="text-xs font-mono text-ink-4 h-20 flex items-center">Simulation requise</div>;
+    return <div className="text-xs font-mono text-ink-4 h-20 flex items-center">Simulation required</div>;
   }
 
   return (
     <div className="space-y-1">
-      <p className="text-xs font-sans text-ink-3 uppercase tracking-wider">Carte de confort PMV — 8760h</p>
+      <p className="text-xs font-sans text-ink-3 uppercase tracking-wider">PMV comfort map — 8760h</p>
       <canvas
         ref={canvasRef}
         className="w-full border border-rule"
         style={{ imageRendering: 'pixelated', height: 64 }}
-        aria-label="Carte de confort PMV annuelle"
+        aria-label="Annual PMV comfort map"
       />
       <div className="flex justify-between text-xs font-mono text-ink-4">
-        <span className="text-blue-500">Froid (PMV&lt;-0.5)</span>
-        <span>Confort</span>
-        <span className="text-accent">Chaud (PMV&gt;+0.5)</span>
+        <span className="text-blue-500">Cold (PMV&lt;-0.5)</span>
+        <span>Comfort</span>
+        <span className="text-accent">Hot (PMV&gt;+0.5)</span>
       </div>
     </div>
   );

@@ -44,7 +44,7 @@ export function TimeSeriesAnnual() {
   }, [annualResult]);
 
   if (!annualResult) {
-    return <div className="text-xs font-mono text-ink-4 h-20 flex items-center">Simulation requise</div>;
+    return <div className="text-xs font-mono text-ink-4 h-20 flex items-center">Simulation required</div>;
   }
 
   const months = ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'];
@@ -87,7 +87,7 @@ export function TimeSeriesAnnual() {
         <line x1={PAD.left + 4} y1={PAD.top + 8} x2={PAD.left + 18} y2={PAD.top + 8} stroke="#2B2B2B" strokeWidth={1.5} />
         <text x={PAD.left + 21} y={PAD.top + 11} fontSize={7} fontFamily="IBM Plex Mono" fill="#2B2B2B">T zone (°C)</text>
         <line x1={PAD.left + 4} y1={PAD.top + 19} x2={PAD.left + 18} y2={PAD.top + 19} stroke="#C8C5BE" strokeWidth={1} strokeDasharray="3 2" />
-        <text x={PAD.left + 21} y={PAD.top + 22} fontSize={7} fontFamily="IBM Plex Mono" fill="#A0A0A0">Q chauffage</text>
+        <text x={PAD.left + 21} y={PAD.top + 22} fontSize={7} fontFamily="IBM Plex Mono" fill="#A0A0A0">Q heating</text>
       </svg>
     </div>
   );

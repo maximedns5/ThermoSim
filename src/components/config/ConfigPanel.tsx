@@ -9,14 +9,14 @@ import {
 import type { ActivePanel } from '../../store/uiStore';
 
 const PANELS: Array<{ id: ActivePanel; label: string }> = [
-  { id: 'geometry',    label: 'Géom.' },
-  { id: 'wall',        label: 'Parois' },
-  { id: 'windows',     label: 'Fenêtres' },
-  { id: 'roof',        label: 'Toiture' },
+  { id: 'geometry',    label: 'Geom.' },
+  { id: 'wall',        label: 'Walls' },
+  { id: 'windows',     label: 'Windows' },
+  { id: 'roof',        label: 'Roof' },
   { id: 'ventilation', label: 'Ventil.' },
-  { id: 'hvac',        label: 'CVC' },
-  { id: 'climate',     label: 'Climat' },
-  { id: 'scenarios',   label: 'Scénarios' },
+  { id: 'hvac',        label: 'HVAC' },
+  { id: 'climate',     label: 'Climate' },
+  { id: 'scenarios',   label: 'Scenarios' },
 ];
 
 const SECTION_COMPONENTS: Record<ActivePanel, React.FC | null> = {
@@ -58,7 +58,7 @@ export function ConfigPanel() {
       <div className="flex-1 overflow-y-auto p-4">
         {activePanel === 'scenarios' ? (
           <div className="space-y-2">
-            <p className="text-xs font-sans text-ink-3 mb-3">Sélectionnez un scénario préconfiguré :</p>
+            <p className="text-xs font-sans text-ink-3 mb-3">Select a preconfigured scenario:</p>
             {Object.values(SCENARIOS).map((s) => (
               <button
                 key={s.id}
