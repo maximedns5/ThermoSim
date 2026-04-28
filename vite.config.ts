@@ -4,17 +4,6 @@ import path from 'path';
 
 export default defineConfig({
   base: '/ThermoSim/',
-  test: {
-    environment: 'node',
-    globals: true,
-    include: ['src/tests/**/*.test.ts'],
-    server: {
-      deps: {
-        // Avoid transforming heavy 3D/React deps during engine-only tests
-        external: ['three', '@react-three/fiber', '@react-three/drei', 'react', 'react-dom'],
-      },
-    },
-  },
   plugins: [react()],
   resolve: {
     alias: {
