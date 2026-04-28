@@ -17,7 +17,7 @@ export function HeatLossHeatmap() {
     const H = 24, D = 365;
     canvas.width = D; canvas.height = H;
 
-    const max = Math.max(...(data as number[]));
+    const max = Math.max(...Array.from(data));
     const img = ctx.createImageData(D, H);
 
     for (let d = 0; d < D; d++) {

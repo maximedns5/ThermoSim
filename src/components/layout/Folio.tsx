@@ -13,7 +13,7 @@ export function Folio() {
         THERMOSIM WEB  ·  {version}  ·  RE2020
       </span>
       <span className="text-2xs font-mono text-ink-4 tracking-wider">
-        {config.name ?? 'Projet sans titre'}  ·  {dateStr}
+        {'Projet sans titre'}  ·  {dateStr}
       </span>
       <span className="text-2xs font-mono text-ink-4 tracking-wider">
         Folio 1/1

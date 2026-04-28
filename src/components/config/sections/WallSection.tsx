@@ -78,7 +78,7 @@ export function WallSection() {
       <div className="grid grid-cols-3 gap-2 pt-2 border-t border-rule-soft">
         <MetricSummary label="U" value={U} unit="W/(m²·K)" critical={U > 1.5} />
         <MetricSummary label="R" value={R} unit="m²·K/W" />
-        <MetricSummary label="Ép." value={thick_cm} unit="cm" decimals={0} />
+        <MetricSummary label="Ép." value={thick_cm} unit="cm" />
       </div>
     </div>
   );
